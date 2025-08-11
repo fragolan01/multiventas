@@ -97,17 +97,37 @@
 
 <script>
     $(document).ready(function() {
+        // Asignamos la función de login a una variable para evitar duplicar código.
+        function login() {
+            var usuario = $('#usuario').val();
+            var password_user = $('#password').val();
+
+            // Verificamos que los campos no estén vacíos antes de hacer la llamada.
+            if (usuario.length === 0 || password_user.length === 0) {
+                $('#respuesta').html('<div class="alert alert-danger" role="alert">Usuario y/o contraseña no pueden estar vacíos.</div>');
+                return; // Detenemos la función si los campos están vacíos.
+            }
+
+            var url = 'login/controller_login.php';
+            $.post(url, { usuario: usuario, password_user: password_user }, function(datos) {
+                // El servidor debe devolver una respuesta clara (ej: un JSON).
+                // Si la respuesta es una redirección, el navegador la procesa automáticamente.
+                // Si el servidor envía un mensaje de error, lo mostramos.
+                $('#respuesta').html(datos);
+            });
+        }
+
+        // 1. Escuchar el evento 'click' del botón de ingresar.
         $('#btn_ingresar').click(function(){
-          var usuario = $('#usuario').val();
-          var password_user = $('#password').val();
-          // alert(usuario + ' ' +  password_user);
+            login();
+        });
 
-          var url = 'login/controller_login.php';
-          $.post(url, {usuario:usuario, password_user:password_user}, function(datos){
-            $('#respuesta').html(datos);
-          });
-
+        // 2. Escuchar el evento 'keypress' del campo de contraseña.
+        $('#password').keypress(function(e) {
+            // El código 13 corresponde a la tecla 'Enter'.
+            if (e.which === 13) {
+                login();
+            }
         });
     });
-
 </script>

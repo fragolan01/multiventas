@@ -3,6 +3,8 @@
 // require_once __DIR__ . '../app/config.php'; 
 include ('../app/config.php');
 
+session_start();
+
 
 $usuario = $_POST['usuario'] ?? '';
 $password_user = $_POST['password_user'] ?? '';
@@ -35,10 +37,10 @@ if($result_login->num_rows > 0 )
     <script>
         location.href = "principal.php";
     </script>
-
-
-
     <?php
+
+    $_SESSION['usuario_session'] = $password_user;
+
     
 
     // Rediregir rl usuario a otra pagina de inicio

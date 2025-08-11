@@ -32,6 +32,10 @@ if($result_login->num_rows > 0 )
         Usuario correcto!
     </div>
 
+    <script>
+        location.href = "principal.php";
+    </script>
+
 
 
     <?php

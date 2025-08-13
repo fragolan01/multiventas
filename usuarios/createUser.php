@@ -27,7 +27,7 @@
 
             <div class="container">
            
-                <h2>Listado de Usuarios</h2>
+                <h2>Ingresa un nuevo Usuario</h2>
 
             </div>            
 
